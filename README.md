@@ -2,21 +2,14 @@
 
 Стенд для сравнительного исследования алгоритмов **Visual Odometry / Visual-Inertial Odometry**
 на KITTI Odometry и KITTI Raw. Цель ВКР — реализовать единый каркас из 4 алгоритмов
-(A1..A4), прогнать на одних и тех же сценах и сравнить по `ATE / RPE / drift` (см.
-[stages/](stages/) для пошаговой истории, [docs/CHANGELOG.md](docs/CHANGELOG.md) — для
-версионной).
+(A1..A4), прогнать на одних и тех же сценах и сравнить по `ATE / RPE / drift`.
 
 | ID | Алгоритм | Stage doc | Состояние |
 |---|---|---|---|
-| A1 | Mono FAST + LK + Essential | [stages/04_a1_implementation.md](stages/04_a1_implementation.md)
-| A2 | Stereo SGBM + FAST + LK + PnP | [stages/05_a2_implementation.md](stages/05_a2_implementation.md)
-| A3 | Mono + IMU EKF (loosely-coupled VIO) | [stages/07_a3_implementation.md](stages/07_a3_implementation.md)
-| A4 | Stereo + IMU EKF | [stages/08_a4_implementation.md](stages/08_a4_implementation.md)
-
-GUI и event-based визуализация — [stages/09_gui_runner.md](stages/09_gui_runner.md)
-(текущий этап). Большой план диплома —
-[`.cursor/plans/vo_research_stand_bd4a3086.plan.md`](.cursor/plans/vo_research_stand_bd4a3086.plan.md).
-
+| A1 | Mono FAST + LK + Essential |
+| A2 | Stereo SGBM + FAST + LK + PnP |
+| A3 | Mono + IMU EKF (loosely-coupled VIO) |
+| A4 | Stereo + IMU EKF 
 ---
 
 ## Быстрый старт
@@ -40,9 +33,6 @@ python -m src.gui                    # ← главное окно, две вк�
    алгоритмы и нажми «📊 Показать наложение» — отдельное окно с N
    траекторий + GT + таблицей метрик (ATE / RPE / drift / success /
    ms/frame). По умолчанию все траектории выравниваются Umeyama-методом.
-
-Подробный гайд (live-визуализация, фильтрация алгоритмов, поведение
-Comparator, CLI-команды) — в [docs/LaunchInstructions.md](docs/LaunchInstructions.md).
 
 ---
 
@@ -102,9 +92,6 @@ python -m src.fusion.ekf --smoke-raw \
         │ (FigureCanvasTk) │      │ (mpl window)        │
         └──────────────────┘      └─────────────────────┘
 ```
-
-Полная диаграмма данных (включая cancel/save) — в
-[stages/09_gui_runner.md](stages/09_gui_runner.md).
 
 ### Структура `src/`
 
@@ -187,22 +174,9 @@ sequences и Raw drives (drive_0018 ↔ Odo 05, drive_0042 ↔ Odo 01, ...) —
 | A4 stereo+IMU EKF | n/a (no IMU) | ATE 6.7 m ✓ | ~95 ms |
 
 A3 в одиночку «не умеет» удерживать масштаб на длинных сценах
-(loosely-coupled mono-VIO без anchor) — см.
-[stages/07_a3_implementation.md](stages/07_a3_implementation.md). A4
+(loosely-coupled mono-VIO без anchor) — см. A4
 закрывает эту проблему через stereo-PnP с абсолютным scale; полностью
 закроет ожидаемо A5 (ORB-SLAM3 с loop closure).
-
----
-
-## Документация
-
-* [docs/LaunchInstructions.md](docs/LaunchInstructions.md) — все команды
-  запуска, как пользоваться GUI, частые проблемы (FAQ).
-* [docs/Description.md](docs/Description.md) — описание архитектуры (для
-  пояснительной записки).
-* [docs/CHANGELOG.md](docs/CHANGELOG.md) — версионная история по этапам.
-* [stages/](stages/) — пошаговые сводки по каждой итерации диплома
-  (от Этапа 1 до текущего).
 
 ---
 
