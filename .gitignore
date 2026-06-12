@@ -21,6 +21,7 @@ stages
 vpr_docs
 docs
 .cursorignore
+.cursor
 docker
 
 # IDE
