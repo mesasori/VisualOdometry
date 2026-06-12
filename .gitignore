@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Project specific
+kitti_data
+my_dataset
+old_structure
+stages
+vpr_docs
+docs
+.cursorignore
+docker
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Models and large files
+*.pth
+*.onnx
+*.pb
+
+# Артефакты прогонов
+results/trajectories/*
+results/metrics/*
+docker/orbslam3/*
+!**/.gitkeep

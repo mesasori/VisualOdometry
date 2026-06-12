@@ -1,0 +1,7 @@
+numpy>=1.24
+opencv-python>=4.8
+matplotlib>=3.7
+PyYAML>=6.0
+
+evo>=1.36
+pykitti>=0.3
